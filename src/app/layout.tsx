@@ -1,36 +1,39 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
-import { ThemeProvider } from '@/components/ThemeProvider'
-import Navigation from '@/components/Navigation'
+import type React from "react"
+import "./globals.css"
+import type { Metadata } from "next"
+import { Inter, JetBrains_Mono } from "next/font/google"
+import { ThemeProvider } from "@/components/ThemeProvider"
+import Navigation from "@/components/Navigation"
 
-const inter = Inter({ 
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 })
 
-const jetbrainsMono = JetBrains_Mono({ 
-  subsets: ['latin'],
-  variable: '--font-jetbrains',
-  display: 'swap',
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
-  title: 'Patrick Ngige - Creative Technologist Portfolio',
-  description: 'Creative Technologist passionate about bridging technology, creativity, and marketing through innovative digital experiences. Specializing in AI, VR, and interactive web development.',
-  keywords: 'Creative Technologist, Front-End Developer, AI Innovator, VR Developer, Interactive Design, Web Development, Portfolio',
-  authors: [{ name: 'Patrick Ngige' }],
+  title: "Patrick Ngige - Creative Technologist Portfolio",
+  description:
+    "Creative Technologist passionate about bridging technology, creativity, and marketing through innovative digital experiences. Specializing in AI, VR, and interactive web development.",
+  keywords:
+    "Creative Technologist, Front-End Developer, AI Innovator, VR Developer, Interactive Design, Web Development, Portfolio",
+  authors: [{ name: "Patrick Ngige" }],
   openGraph: {
-    title: 'Patrick Ngige - Creative Technologist',
-    description: 'Bridging technology, creativity, and marketing through innovative digital experiences.',
-    type: 'website',
-    locale: 'en_US',
+    title: "Patrick Ngige - Creative Technologist",
+    description: "Bridging technology, creativity, and marketing through innovative digital experiences.",
+    type: "website",
+    locale: "en_US",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Patrick Ngige - Creative Technologist',
-    description: 'Bridging technology, creativity, and marketing through innovative digital experiences.',
+    card: "summary_large_image",
+    title: "Patrick Ngige - Creative Technologist",
+    description: "Bridging technology, creativity, and marketing through innovative digital experiences.",
   },
   robots: {
     index: true,
@@ -45,15 +48,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <body 
-        className="min-h-screen bg-background-page text-text-primary"
-        suppressHydrationWarning
-      >
+      <body className="min-h-screen bg-background-page text-text-primary" suppressHydrationWarning>
         <ThemeProvider>
-          {/* <Navigation /> */}
-          <main className="relative min-h-screen flex flex-col">
-            {children}
-          </main>
+          <Navigation />
+          <main className="relative min-h-screen flex flex-col pt-16">{children}</main>
         </ThemeProvider>
       </body>
     </html>

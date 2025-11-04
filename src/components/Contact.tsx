@@ -1,131 +1,61 @@
-'use client'
+"use client"
 
-import { motion, Variants } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Send, 
-  Github, 
-  Linkedin, 
-  Twitter,
-  MessageCircle,
-  Calendar,
-  ExternalLink,
-  Globe,
-  Zap
-} from 'lucide-react'
+import type React from "react"
+import { useState, useRef } from "react"
+import { motion, useInView, type Variants } from "framer-motion"
+import { MessageCircle, Send, Mail, Zap, Calendar } from "lucide-react"
 
+const projectTypes = ["Web Development", "App Design", "Graphic Design"]
 const contactInfo = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "hello@patrickngige.com",
-    href: "mailto:hello@patrickngige.com"
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "+254 700 000 000",
-    href: "tel:+254700000000"
-  },
-  {
-    icon: MapPin,
-    label: "Location",
-    value: "Nairobi, Kenya",
-    href: "#"
-  },
-  {
-    icon: Globe,
-    label: "Timezone",
-    value: "EAT (UTC+3)",
-    href: "#"
-  }
+  { label: "Phone", value: "+1234567890", icon: Calendar, href: "tel:+1234567890" },
+  { label: "Email", value: "hello@patrickngige.com", icon: Mail, href: "mailto:hello@patrickngige.com" },
 ]
-
 const socialLinks = [
-  {
-    icon: Github,
-    label: "GitHub",
-    href: "https://github.com/patrickngige",
-    username: "@patrickngige"
-  },
-  {
-    icon: Linkedin,
-    label: "LinkedIn",
-    href: "https://linkedin.com/in/patrickngige",
-    username: "Patrick Ngige"
-  },
-  {
-    icon: Twitter,
-    label: "Twitter",
-    href: "https://twitter.com/patrickngige",
-    username: "@patrickngige"
-  },
-  {
-    icon: ExternalLink,
-    label: "Portfolio",
-    href: "#",
-    username: "patrickngige.com"
-  }
-]
-
-const projectTypes = [
-  "Web Development",
-  "3D Web Experience",
-  "Creative Technology",
-  "AI Integration",
-  "E-commerce Platform",
-  "Performance Optimization",
-  "Consultation",
-  "Other"
+  { label: "LinkedIn", username: "patrickngige", icon: Zap, href: "https://linkedin.com/in/patrickngige" },
+  { label: "GitHub", username: "patrickngige", icon: Zap, href: "https://github.com/patrickngige" },
 ]
 
 export default function Contact() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    project: '',
-    message: ''
+    name: "",
+    email: "",
+    project: "",
+    message: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
+
     // Simulate form submission
     setTimeout(() => {
-      alert('Thank you for your message! I will get back to you soon.')
-      setFormData({ name: '', email: '', project: '', message: '' })
+      alert("Thank you for your message! I will get back to you soon.")
+      setFormData({ name: "", email: "", project: "", message: "" })
       setIsSubmitting(false)
     }, 1000)
   }
 
-  // Define container variants
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   }
 
-  // Define item variants
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -133,35 +63,28 @@ export default function Contact() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0, 0, 0.2, 1]
-      }
-    }
+        ease: [0, 0, 0.2, 1],
+      },
+    },
   }
 
   return (
     <section id="contact" className="section-padding bg-background-page section-bg section-divider">
       <div className="w-full max-w-7xl mx-auto px-6 lg:px-12">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={containerVariants}
-        >
+        <motion.div ref={ref} initial="hidden" animate={isInView ? "visible" : "hidden"} variants={containerVariants}>
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center mb-2xl">
-            <h2 className="text-section font-bold mb-lg gradient-text">
-              Let&apos;s Create Something Amazing
-            </h2>
+            <h2 className="text-section font-bold mb-lg gradient-text">Let&apos;s Create Something Amazing</h2>
             <p className="text-xl text-text-secondary max-w-2xl mx-auto">
-              Ready to bring your creative technology vision to life? Let&apos;s discuss your project 
-              and explore the possibilities together.
+              Ready to bring your creative technology vision to life? Let&apos;s discuss your project and explore the
+              possibilities together.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-xl">
             {/* Contact Form */}
-            <motion.div variants={itemVariants} className="lg:col-span-2">
-              <div className="card-glass rounded-card p-xl hover-glow">
+            <motion.div variants={itemVariants}>
+              <div className="card-glass rounded-card p-xl hover-glow h-full">
                 <h3 className="text-2xl font-semibold mb-lg text-text-primary flex items-center">
                   <motion.div
                     initial={{ scale: 0, rotate: -180 }}
@@ -172,13 +95,13 @@ export default function Contact() {
                     <MessageCircle className="w-6 h-6" />
                     <motion.div
                       animate={{ opacity: [0.5, 1, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
                       className="absolute inset-0 bg-accent-cyan blur-md rounded-full"
                     />
                   </motion.div>
                   <span className="gradient-text-subtle">Send me a message</span>
                 </h3>
-                
+
                 <form onSubmit={handleSubmit} className="space-y-lg">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-lg">
                     <div>
@@ -196,7 +119,7 @@ export default function Contact() {
                         placeholder="Your name"
                       />
                     </div>
-                    
+
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-text-primary mb-2">
                         Email Address *
@@ -263,7 +186,7 @@ export default function Contact() {
                         <motion.div
                           className="w-5 h-5 border-2 border-black border-t-transparent rounded-full mr-3"
                           animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: [0, 0, 1, 1] }}
+                          transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: [0, 0, 1, 1] }}
                         />
                         Sending...
                       </>
@@ -278,7 +201,6 @@ export default function Contact() {
               </div>
             </motion.div>
 
-            {/* Contact Information */}
             <motion.div variants={itemVariants} className="space-y-lg">
               {/* Contact Details */}
               <div className="card-glass rounded-card p-lg hover-glow">
@@ -352,7 +274,7 @@ export default function Contact() {
                     <Mail className="w-5 h-5 text-accent-cyan mr-4" />
                     <span className="text-text-primary">Send direct email</span>
                   </motion.a>
-                  
+
                   <motion.a
                     href="#"
                     className="flex items-center p-3 rounded-lg hover:bg-background-page transition-colors duration-300"
@@ -361,7 +283,7 @@ export default function Contact() {
                     <Calendar className="w-5 h-5 text-accent-magenta mr-4" />
                     <span className="text-text-primary">Schedule a call</span>
                   </motion.a>
-                  
+
                   <motion.a
                     href="#projects"
                     className="flex items-center p-3 rounded-lg hover:bg-background-page transition-colors duration-300"
